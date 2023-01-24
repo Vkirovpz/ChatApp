@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Chat.Contracts.Domain
 {
-    internal class Message
+    public class Message
     {
+        public string FromUser { get; set; }
+        public string ToUser { get; set; }
+        public string Messagesent { get; set; }
     }
 }

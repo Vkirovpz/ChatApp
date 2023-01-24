@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Chat.Contracts.Domain
 {
-    internal class User
+    public class User
     {
+        public string UserName { get; set; }
+        public IObservable<Message> UserMessages { get; set; }
     }
 }
