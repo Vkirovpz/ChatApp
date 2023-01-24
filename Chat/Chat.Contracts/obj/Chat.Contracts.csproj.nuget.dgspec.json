@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat\\Chat.csproj": {}
+    "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat.Contracts\\Chat.Contracts.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat\\Chat.csproj": {
+    "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat.Contracts\\Chat.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat\\Chat.csproj",
-        "projectName": "Chat",
-        "projectPath": "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat\\Chat.csproj",
+        "projectUniqueName": "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat.Contracts\\Chat.Contracts.csproj",
+        "projectName": "Chat.Contracts",
+        "projectPath": "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat.Contracts\\Chat.Contracts.csproj",
         "packagesPath": "C:\\Users\\ValentinKirov\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat\\obj\\",
+        "outputPath": "D:\\Projects\\Chat\\ChatApp\\Chat\\Chat.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ValentinKirov\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "System.ServiceModel.Primitives": {
+              "target": "Package",
+              "version": "[4.10.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
