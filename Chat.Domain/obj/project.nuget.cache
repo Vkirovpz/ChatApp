@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RFkjOibl8RuiTpUoP8nJ6eaYxr5TtXfPoga/mFxLq3YROCYvZFv94WfnzuCjVPavuU7gE4ctbTn7eOxs78LkHw==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\Chat\\ChatApp\\Chat.Domain\\Chat.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ValentinKirov\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\ValentinKirov\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

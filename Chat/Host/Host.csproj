@@ -61,5 +61,11 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Chat.Domain\Chat.Domain.csproj">
+      <Project>{1168d145-5f22-434c-9a98-0f412094a297}</Project>
+      <Name>Chat.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
