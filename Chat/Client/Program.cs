@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Chat.Domain;
+using System;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Client
 {
@@ -14,6 +12,14 @@ namespace Client
             InstanceContext context = new InstanceContext(new MyCallback());
             Proxy.ChatServiceClient client = new Proxy.ChatServiceClient(context);
 
+            //var chatApp = new ChatApp();
+            //var room = chatApp.CreateChatRoom("TestRoom");
+            //var room2 = chatApp.CreateChatRoom("TestRoom2");
+            //Console.WriteLine("Enter UserName");
+            //var username = Console.ReadLine();
+            //var user = chatApp.CreateUser(username);
+            //user.Join(room);
+            //Console.WriteLine($"You entered Chat Room - {room.RoomName}");
             Console.WriteLine("Enter UserName");
             var username = Console.ReadLine();
             client.Join(username);

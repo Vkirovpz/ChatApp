@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Chat.Domain
 {
@@ -28,12 +29,20 @@ namespace Chat.Domain
             users.Remove(user);
         }
 
+        public override string ToString() => RoomName;
+
+        public override bool Equals(object obj) => Equals(obj as ChatRoom);
+
+        public override int GetHashCode() => RoomName.GetHashCode();
+
         public bool Equals(ChatRoom other)
         {
             if (other is null) return false;
 
             return other.RoomName == RoomName;
         }
-   
+        public static bool operator ==(ChatRoom obj1, ChatRoom obj2) => obj1.Equals(obj2);
+        public static bool operator !=(ChatRoom obj1, ChatRoom obj2) => obj1 == obj2 == false;
     }
+
 }

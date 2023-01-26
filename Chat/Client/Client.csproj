@@ -82,5 +82,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Chat.Domain\Chat.Domain.csproj">
+      <Project>{1168D145-5F22-434C-9A98-0F412094A297}</Project>
+      <Name>Chat.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

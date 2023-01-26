@@ -16,6 +16,8 @@ namespace Host
             Console.WriteLine("Service is ready");
             Console.ReadLine();
             host.Close();
+
+
         }
     }
 }

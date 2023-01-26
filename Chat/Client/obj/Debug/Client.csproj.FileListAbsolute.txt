@@ -6,3 +6,6 @@ D:\Projects\Chat\ChatApp\Chat\Client\obj\Debug\Client.csproj.SuggestedBindingRed
 D:\Projects\Chat\ChatApp\Chat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 D:\Projects\Chat\ChatApp\Chat\Client\obj\Debug\Client.exe
 D:\Projects\Chat\ChatApp\Chat\Client\obj\Debug\Client.pdb
+D:\Projects\Chat\ChatApp\Chat\Client\bin\Debug\Chat.Domain.dll
+D:\Projects\Chat\ChatApp\Chat\Client\bin\Debug\Chat.Domain.pdb
+D:\Projects\Chat\ChatApp\Chat\Client\obj\Debug\Client.csproj.CopyComplete
