@@ -11,10 +11,9 @@ namespace GrpcStreaming.Providers
             new ChatRoom(3)
         };
 
-        public ChatRoom GetRandomChatRoom()
+        public ChatRoom GetFreeChatRoom()
         {
-            var randomRoom = new Random().Next(ChatRooms.Count);
-            return ChatRooms.FirstOrDefault(c => c.Id == randomRoom);
+            return ChatRooms.FirstOrDefault(c => c.UsersInRoom.Count < 20);
         }
 
         public ChatRoom GetChatRoomById(int roomId)

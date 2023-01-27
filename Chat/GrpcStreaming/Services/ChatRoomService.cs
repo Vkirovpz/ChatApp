@@ -1,6 +1,5 @@
 ﻿using Grpc.Core;
 using GrpcStreaming.Providers;
-using System.Reflection;
 
 namespace GrpcStreaming.Services
 {
@@ -25,7 +24,7 @@ namespace GrpcStreaming.Services
 
         public Task<int> AddUserToChatRoomAsync(User user)
         {
-            var room = _chatRoomProvider.GetRandomChatRoom();
+            var room = _chatRoomProvider.GetFreeChatRoom();
             room.UsersInRoom.Add(new Models.User
             {
                 Name = user.Name,

@@ -7,9 +7,10 @@ internal class Program
      static async Task Main(string[] args)
     {
         AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-        Console.WriteLine("Ender Username :");
 
+        Console.WriteLine("Enter Username :");
         var username = Console.ReadLine();
+
         var user = new User
         {
             Id = Guid.NewGuid().ToString(),
@@ -18,6 +19,7 @@ internal class Program
 
         var channel = GrpcChannel.ForAddress("http://localhost:5000", new GrpcChannelOptions { Credentials = ChannelCredentials.Insecure });
         var client = new UserService.UserServiceClient(channel);
+
         var joinUserReply = await client.JoinUserChatAsync(new JoinUserRequest
         {
             User = user

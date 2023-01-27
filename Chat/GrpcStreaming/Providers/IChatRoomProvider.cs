@@ -4,7 +4,7 @@ namespace GrpcStreaming.Providers
 {
     public interface IChatRoomProvider
     {
-        ChatRoom GetRandomChatRoom();
+        ChatRoom GetFreeChatRoom();
         ChatRoom GetChatRoomById(int roomId);
         ChatRoom AddChatRoom();
     }

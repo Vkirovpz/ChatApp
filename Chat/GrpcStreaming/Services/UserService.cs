@@ -6,7 +6,6 @@ namespace GrpcStreaming.Services
     {
         private readonly IChatRoomService _chatRoomService;
 
-
         public UserService(IChatRoomService chatRoomService)
         {
             _chatRoomService = chatRoomService;
