@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Host.Models;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace Host

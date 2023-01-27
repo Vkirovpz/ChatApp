@@ -10,7 +10,7 @@ namespace Client
     {
         public void RecieveMessage(string user, string message)
         {
-            Console.WriteLine("{0}:{1}", user, message);
+            Console.WriteLine("{0} : {1}", user, message);
         }
     }
 }

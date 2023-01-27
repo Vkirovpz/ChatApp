@@ -1,0 +1,2 @@
+obj\Debug\net5.0\Protos/Streamer.cs \
+obj\Debug\net5.0\Protos/StreamerGrpc.cs: Protos/streamer.proto
