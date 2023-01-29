@@ -716,19 +716,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ValentinKirov\\.nuget\\packages\\": {}
+    "C:\\Users\\Valentin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\Chat\\ChatApp\\Chat\\GrpcStreaming\\GrpcStreaming.csproj",
+      "projectUniqueName": "C:\\Users\\Valentin\\Desktop\\CSharp\\Chat\\ChatApp\\Chat\\GrpcStreaming\\GrpcStreaming.csproj",
       "projectName": "GrpcStreaming",
-      "projectPath": "D:\\Projects\\Chat\\ChatApp\\Chat\\GrpcStreaming\\GrpcStreaming.csproj",
-      "packagesPath": "C:\\Users\\ValentinKirov\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\Chat\\ChatApp\\Chat\\GrpcStreaming\\obj\\",
+      "projectPath": "C:\\Users\\Valentin\\Desktop\\CSharp\\Chat\\ChatApp\\Chat\\GrpcStreaming\\GrpcStreaming.csproj",
+      "packagesPath": "C:\\Users\\Valentin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Valentin\\Desktop\\CSharp\\Chat\\ChatApp\\Chat\\GrpcStreaming\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ValentinKirov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Valentin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -778,7 +778,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
