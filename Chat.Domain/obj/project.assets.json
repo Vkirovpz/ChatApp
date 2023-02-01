@@ -180,19 +180,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Valentin\\.nuget\\packages\\": {}
+    "C:\\Users\\ValentinKirov\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Valentin\\Desktop\\CSharp\\Chat\\ChatApp\\Chat.Domain\\Chat.Domain.csproj",
+      "projectUniqueName": "D:\\Projects\\Chat\\ChatApp\\Chat.Domain\\Chat.Domain.csproj",
       "projectName": "Chat.Domain",
-      "projectPath": "C:\\Users\\Valentin\\Desktop\\CSharp\\Chat\\ChatApp\\Chat.Domain\\Chat.Domain.csproj",
-      "packagesPath": "C:\\Users\\Valentin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Valentin\\Desktop\\CSharp\\Chat\\ChatApp\\Chat.Domain\\obj\\",
+      "projectPath": "D:\\Projects\\Chat\\ChatApp\\Chat.Domain\\Chat.Domain.csproj",
+      "packagesPath": "C:\\Users\\ValentinKirov\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\Chat\\ChatApp\\Chat.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Valentin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ValentinKirov\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -236,7 +236,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -2,9 +2,8 @@ syntax = "proto3";
 
 package GrpcStreaming;
 
-// The user service definition.
 service UserService {
-  // Creates user
+
   rpc JoinUserChat (JoinUserRequest) returns (JoinUserReply);
   rpc SendMessageToChatRoom(stream ChatMessage) returns (stream ChatMessage);
 }

@@ -38,10 +38,10 @@ namespace GrpcStreaming.Services
             _chatRoomProvider.GetChatRoomById(roomId).UsersInRoom.FirstOrDefault(u => u.Id == userId).Stream = responseStream;
         }
 
-        public void DisconnectUser(int roomId, Guid customerId)
+        public void DisconnectUser(int roomId, Guid userId)
         {
             var room = _chatRoomProvider.GetChatRoomById(roomId);
-            room.UsersInRoom.Remove(room.UsersInRoom.FirstOrDefault(c => c.Id == customerId));
+            room.UsersInRoom.Remove(room.UsersInRoom.FirstOrDefault(c => c.Id == userId));
         }
     }
 }

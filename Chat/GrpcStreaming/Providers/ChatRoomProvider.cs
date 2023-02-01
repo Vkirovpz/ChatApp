@@ -4,7 +4,7 @@ namespace GrpcStreaming.Providers
 {
     public class ChatRoomProvider : IChatRoomProvider
     {
-        private static readonly List<ChatRoom> ChatRooms = new List<ChatRoom>
+        private static readonly List<ChatRoom> ChatRooms = new()
         {
             new ChatRoom(1),
             new ChatRoom(2),

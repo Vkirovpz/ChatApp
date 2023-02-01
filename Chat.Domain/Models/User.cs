@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Chat.Domain
 {
-    public class User
+    public class User 
     {
-        private List<ChatRoom> chatRooms = new List<ChatRoom>();
+        private readonly List<ChatRoom> _chatRooms = new List<ChatRoom>();
 
         public User(string username)
         {
@@ -16,24 +16,40 @@ namespace Chat.Domain
             Username = username;
         }
 
-        public IEnumerable<ChatRoom> ChatRooms => chatRooms.AsReadOnly();
+        public IEnumerable<ChatRoom> ChatRooms => _chatRooms.AsReadOnly();
         public string Username { get; }
 
-        public void Join(ChatRoom chatRoom)
+        public void JoinServer(ChatApp server)
         {
-            if (chatRoom.Users.Contains(this))
-                return;           
-            chatRoom.ConnectUser(this);
-            chatRooms.Add(chatRoom);
+            if (server is null)
+                throw new ArgumentNullException(nameof(server));
+            server.ConnectUser(this);
         }
 
-        public void Leave(ChatRoom chatRoom)
+        public void JoinChatRoom(ChatRoom chatRoom)
         {
-            if (!chatRooms.Contains(chatRoom))
+            if (chatRoom is null)
+                throw new ArgumentNullException(nameof(chatRoom));
+
+            if (chatRoom.Users.Any(x => x.Username == Username))
+                return;
+            chatRoom.ConnectUser(this);
+
+            if (_chatRooms.Any(c => c.Name == chatRoom.Name))
+                return;
+            _chatRooms.Add(chatRoom);
+        }
+
+        public void LeaveChatRoom(ChatRoom chatRoom)
+        {
+            if (chatRoom is null)
+                throw new ArgumentNullException(nameof(chatRoom));
+
+            if (!_chatRooms.Any(c => c.Name == chatRoom.Name))
                 return;
 
             chatRoom.DisconnectUser(this);
-            chatRooms.Remove(chatRoom);
+            _chatRooms.Remove(chatRoom);
         }
 
     }

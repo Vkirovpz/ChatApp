@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{19A40EE5-4212-4565-A943-408E88AB8EE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfHost", "Host\WcfHost.csproj", "{19A40EE5-4212-4565-A943-408E88AB8EE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{B4FBA9E0-B564-479D-835A-94EC748CD404}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfClient", "Client\WcfClient.csproj", "{B4FBA9E0-B564-479D-835A-94EC748CD404}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19A40EE5-4212-4565-A943-408E88AB8EE7} = {19A40EE5-4212-4565-A943-408E88AB8EE7}
 	EndProjectSection
@@ -16,9 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcStreaming", "GrpcStream
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcStreamingClient", "GrpcStreamingClient\GrpcStreamingClient.csproj", "{D8645DE5-A697-446D-B16D-1B4BBE5C6E2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRServer", "SignalRServer\SignalRServer.csproj", "{16BCDE46-BBF9-48B7-86A4-C65827BCAB7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRServer", "SignalRServer\SignalRServer.csproj", "{16BCDE46-BBF9-48B7-86A4-C65827BCAB7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClient", "SignalRClient\SignalRClient.csproj", "{874B4960-4176-4453-B1D0-615F554EADF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClient", "SignalRClient\SignalRClient.csproj", "{874B4960-4176-4453-B1D0-615F554EADF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

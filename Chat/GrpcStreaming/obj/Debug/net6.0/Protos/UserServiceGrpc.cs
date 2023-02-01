@@ -8,9 +8,6 @@
 using grpc = global::Grpc.Core;
 
 namespace GrpcStreaming {
-  /// <summary>
-  /// The user service definition.
-  /// </summary>
   public static partial class UserService
   {
     static readonly string __ServiceName = "GrpcStreaming.UserService";
@@ -81,12 +78,6 @@ namespace GrpcStreaming {
     [grpc::BindServiceMethod(typeof(UserService), "BindService")]
     public abstract partial class UserServiceBase
     {
-      /// <summary>
-      /// Creates user
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::GrpcStreaming.JoinUserReply> JoinUserChat(global::GrpcStreaming.JoinUserRequest request, grpc::ServerCallContext context)
       {

@@ -9,17 +9,10 @@ public class Program
             .WithUrl("https://localhost:7021/chatHub")
             .Build();
 
-        _connection.Closed += async (error) =>
-        {
-            await Task.Delay(new Random().Next(0, 5) * 1000);
-            await _connection.StartAsync();
-        };
-
         await ConnectAsync();
         Console.WriteLine("Enter your username");
         var user = Console.ReadLine();
 
-        bool stop = false;
         var message = Console.ReadLine();
         while (!string.Equals(message, "qw!", StringComparison.CurrentCultureIgnoreCase))
         {
