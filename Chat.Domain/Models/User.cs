@@ -1,55 +1,67 @@
 ﻿using Chat.Domain.Models;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Chat.Domain
 {
-    public class User 
+    public class User
     {
-        private readonly List<ChatRoom> _chatRooms = new List<ChatRoom>();
-
-        public User(string username)
+        private readonly IMessageWriter _messageWriter;
+        public User(string username, IMessageWriter messageWriter)
         {
             if (string.IsNullOrEmpty(username)) throw new ArgumentException($"'{nameof(username)}' cannot be null or empty.", nameof(username));
 
             Username = username;
+            _messageWriter = messageWriter ?? throw new ArgumentNullException(nameof(messageWriter));
         }
-
-        public IEnumerable<ChatRoom> ChatRooms => _chatRooms.AsReadOnly();
         public string Username { get; }
 
-        public void JoinServer(ChatApp server)
+        public ChatRoom Room { get; private set; }
+        public Server Server { get; private set; }
+        public void CreateRoom(string name)
         {
-            if (server is null)
-                throw new ArgumentNullException(nameof(server));
-            server.ConnectUser(this);
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException($"'{nameof(name)}' cannot be null or empty.", nameof(name));
+            Server.CreateChatRoom(name, Username);
         }
 
-        public void JoinChatRoom(ChatRoom chatRoom)
+        public void JoinRoom(string name)
         {
-            if (chatRoom is null)
-                throw new ArgumentNullException(nameof(chatRoom));
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException($"'{nameof(name)}' cannot be null or empty.", nameof(name));
 
-            if (chatRoom.Users.Any(x => x.Username == Username))
+            if (Server.ChatRooms.Any(r => r.Name == name) == false)
                 return;
-            chatRoom.ConnectUser(this);
-
-            if (_chatRooms.Any(c => c.Name == chatRoom.Name))
-                return;
-            _chatRooms.Add(chatRoom);
+            Room = Server.ChatRooms.First(r => r.Name == name);
+            Room.ConnectUser(this);
         }
 
-        public void LeaveChatRoom(ChatRoom chatRoom)
+        public void JoinRoom(ChatRoom room)
         {
-            if (chatRoom is null)
-                throw new ArgumentNullException(nameof(chatRoom));
+            if (room is null) throw new ArgumentNullException(nameof(room));
 
-            if (!_chatRooms.Any(c => c.Name == chatRoom.Name))
-                return;
+            Room = room;
+        }
 
-            chatRoom.DisconnectUser(this);
-            _chatRooms.Remove(chatRoom);
+        public void LeaveRoom()
+        {
+            Room.DisconnectUser(this);
+        }
+
+        public void SendMessage(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                throw new ArgumentException($"'{nameof(text)}' cannot be null or empty.", nameof(text));
+
+            Room.ReceiveMessageFromUser(text, Username);
+        }
+
+        public void ReceiveMessage(Message message)
+        {
+            if (message is null)
+                throw new ArgumentNullException(nameof(message));
+            _messageWriter.WriteMessage(message);
         }
 
     }
