@@ -61,6 +61,10 @@ namespace Chat.Grpc.Server.Protos {
     static readonly grpc::Marshaller<global::Chat.Grpc.Server.Protos.LeaveChatRoomRequest> __Marshaller_chat_LeaveChatRoomRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Chat.Grpc.Server.Protos.LeaveChatRoomRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Chat.Grpc.Server.Protos.LeaveChatRoomResponse> __Marshaller_chat_LeaveChatRoomResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Chat.Grpc.Server.Protos.LeaveChatRoomResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Chat.Grpc.Server.Protos.GetAllRoomsRequest> __Marshaller_chat_GetAllRoomsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Chat.Grpc.Server.Protos.GetAllRoomsRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Chat.Grpc.Server.Protos.ListRoomsResponse> __Marshaller_chat_ListRoomsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Chat.Grpc.Server.Protos.ListRoomsResponse.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Chat.Grpc.Server.Protos.ConnectUserRequest, global::Chat.Grpc.Server.Protos.ConnectUserResponse> __Method_ConnectUser = new grpc::Method<global::Chat.Grpc.Server.Protos.ConnectUserRequest, global::Chat.Grpc.Server.Protos.ConnectUserResponse>(
@@ -93,6 +97,14 @@ namespace Chat.Grpc.Server.Protos {
         "LeaveChatRoom",
         __Marshaller_chat_LeaveChatRoomRequest,
         __Marshaller_chat_LeaveChatRoomResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Chat.Grpc.Server.Protos.GetAllRoomsRequest, global::Chat.Grpc.Server.Protos.ListRoomsResponse> __Method_GetAllChatRooms = new grpc::Method<global::Chat.Grpc.Server.Protos.GetAllRoomsRequest, global::Chat.Grpc.Server.Protos.ListRoomsResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllChatRooms",
+        __Marshaller_chat_GetAllRoomsRequest,
+        __Marshaller_chat_ListRoomsResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -128,6 +140,12 @@ namespace Chat.Grpc.Server.Protos {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Chat.Grpc.Server.Protos.ListRoomsResponse> GetAllChatRooms(global::Chat.Grpc.Server.Protos.GetAllRoomsRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -139,7 +157,8 @@ namespace Chat.Grpc.Server.Protos {
           .AddMethod(__Method_ConnectUser, serviceImpl.ConnectUser)
           .AddMethod(__Method_CreateChatRoom, serviceImpl.CreateChatRoom)
           .AddMethod(__Method_JoinChatRoom, serviceImpl.JoinChatRoom)
-          .AddMethod(__Method_LeaveChatRoom, serviceImpl.LeaveChatRoom).Build();
+          .AddMethod(__Method_LeaveChatRoom, serviceImpl.LeaveChatRoom)
+          .AddMethod(__Method_GetAllChatRooms, serviceImpl.GetAllChatRooms).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -153,6 +172,7 @@ namespace Chat.Grpc.Server.Protos {
       serviceBinder.AddMethod(__Method_CreateChatRoom, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Chat.Grpc.Server.Protos.CreateChatRoomRequest, global::Chat.Grpc.Server.Protos.CreateChatRoomResponse>(serviceImpl.CreateChatRoom));
       serviceBinder.AddMethod(__Method_JoinChatRoom, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Chat.Grpc.Server.Protos.JoinChatRoomRequest, global::Chat.Grpc.Server.Protos.JoinChatRoomResponse>(serviceImpl.JoinChatRoom));
       serviceBinder.AddMethod(__Method_LeaveChatRoom, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Chat.Grpc.Server.Protos.LeaveChatRoomRequest, global::Chat.Grpc.Server.Protos.LeaveChatRoomResponse>(serviceImpl.LeaveChatRoom));
+      serviceBinder.AddMethod(__Method_GetAllChatRooms, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Chat.Grpc.Server.Protos.GetAllRoomsRequest, global::Chat.Grpc.Server.Protos.ListRoomsResponse>(serviceImpl.GetAllChatRooms));
     }
 
   }

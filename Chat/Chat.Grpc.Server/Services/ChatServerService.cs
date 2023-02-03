@@ -56,6 +56,15 @@ namespace Chat.Grpc.Server.Services
             });
         }
 
+        public override Task<ListRoomsResponse> GetAllChatRooms(GetAllRoomsRequest request, ServerCallContext context)
+        {
+            var allRooms = chatServer.GetAllRooms();
+
+            ListRoomsResponse response = new ListRoomsResponse();
+            response.RoomName.AddRange(allRooms);
+            return ListRoomsResponse;
+        }
+
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Chat.Domain.Models
@@ -37,6 +38,12 @@ namespace Chat.Domain.Models
             var user = server.GetUserByUsername(username);
             var room = user.Room;
             return room.DisconnectUser(user);
+        }
+
+        public List<string> GetAllRooms()
+        {
+            List<string> roomsAsList = server.GetAllChatRoomsNames().ToList();
+            return roomsAsList;
         }
     }
 }

@@ -61,6 +61,10 @@ namespace Chat.Grpc.Client.Protos {
     static readonly grpc::Marshaller<global::Chat.Grpc.Client.Protos.LeaveChatRoomRequest> __Marshaller_chat_LeaveChatRoomRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Chat.Grpc.Client.Protos.LeaveChatRoomRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Chat.Grpc.Client.Protos.LeaveChatRoomResponse> __Marshaller_chat_LeaveChatRoomResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Chat.Grpc.Client.Protos.LeaveChatRoomResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Chat.Grpc.Client.Protos.GetAllRoomsRequest> __Marshaller_chat_GetAllRoomsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Chat.Grpc.Client.Protos.GetAllRoomsRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Chat.Grpc.Client.Protos.ListRoomsResponse> __Marshaller_chat_ListRoomsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Chat.Grpc.Client.Protos.ListRoomsResponse.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Chat.Grpc.Client.Protos.ConnectUserRequest, global::Chat.Grpc.Client.Protos.ConnectUserResponse> __Method_ConnectUser = new grpc::Method<global::Chat.Grpc.Client.Protos.ConnectUserRequest, global::Chat.Grpc.Client.Protos.ConnectUserResponse>(
@@ -93,6 +97,14 @@ namespace Chat.Grpc.Client.Protos {
         "LeaveChatRoom",
         __Marshaller_chat_LeaveChatRoomRequest,
         __Marshaller_chat_LeaveChatRoomResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Chat.Grpc.Client.Protos.GetAllRoomsRequest, global::Chat.Grpc.Client.Protos.ListRoomsResponse> __Method_GetAllChatRooms = new grpc::Method<global::Chat.Grpc.Client.Protos.GetAllRoomsRequest, global::Chat.Grpc.Client.Protos.ListRoomsResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllChatRooms",
+        __Marshaller_chat_GetAllRoomsRequest,
+        __Marshaller_chat_ListRoomsResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -206,6 +218,26 @@ namespace Chat.Grpc.Client.Protos {
       public virtual grpc::AsyncUnaryCall<global::Chat.Grpc.Client.Protos.LeaveChatRoomResponse> LeaveChatRoomAsync(global::Chat.Grpc.Client.Protos.LeaveChatRoomRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_LeaveChatRoom, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Chat.Grpc.Client.Protos.ListRoomsResponse GetAllChatRooms(global::Chat.Grpc.Client.Protos.GetAllRoomsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllChatRooms(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Chat.Grpc.Client.Protos.ListRoomsResponse GetAllChatRooms(global::Chat.Grpc.Client.Protos.GetAllRoomsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetAllChatRooms, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Chat.Grpc.Client.Protos.ListRoomsResponse> GetAllChatRoomsAsync(global::Chat.Grpc.Client.Protos.GetAllRoomsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllChatRoomsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Chat.Grpc.Client.Protos.ListRoomsResponse> GetAllChatRoomsAsync(global::Chat.Grpc.Client.Protos.GetAllRoomsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetAllChatRooms, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

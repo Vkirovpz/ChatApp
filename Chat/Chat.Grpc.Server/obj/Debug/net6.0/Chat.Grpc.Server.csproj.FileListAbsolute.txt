@@ -12,6 +12,8 @@ D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\bin\Debug\net6.0\Grpc.Core.Api.dl
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\bin\Debug\net6.0\Grpc.Net.Client.dll
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\bin\Debug\net6.0\Grpc.Net.ClientFactory.dll
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\bin\Debug\net6.0\Grpc.Net.Common.dll
+D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\bin\Debug\net6.0\Chat.Domain.dll
+D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\bin\Debug\net6.0\Chat.Domain.pdb
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\obj\Debug\net6.0\Chat.Grpc.Server.csproj.AssemblyReference.cache
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\obj\Debug\net6.0\Chat.Grpc.Server.GeneratedMSBuildEditorConfig.editorconfig
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\obj\Debug\net6.0\Chat.Grpc.Server.AssemblyInfoInputs.cache
@@ -32,5 +34,3 @@ D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\obj\Debug\net6.0\refint\Chat.Grpc
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\obj\Debug\net6.0\Chat.Grpc.Server.pdb
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\obj\Debug\net6.0\Chat.Grpc.Server.genruntimeconfig.cache
 D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\obj\Debug\net6.0\ref\Chat.Grpc.Server.dll
-D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\bin\Debug\net6.0\Chat.Domain.dll
-D:\Projects\Chat\ChatApp\Chat\Chat.Grpc.Server\bin\Debug\net6.0\Chat.Domain.pdb
