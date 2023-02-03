@@ -22,6 +22,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClient", "SignalRCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainTest", "DomainTest\DomainTest.csproj", "{D7EB4A0F-FA35-4FB1-990F-6167A76FCAC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Grpc.Server", "Chat.Grpc.Server\Chat.Grpc.Server.csproj", "{6F7355AB-F17E-4778-8591-013A8E44C648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Grpc.Client", "Chat.Grpc.Client\Chat.Grpc.Client.csproj", "{737B2924-BAE1-4EA1-A352-C5C267B61602}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +64,14 @@ Global
 		{D7EB4A0F-FA35-4FB1-990F-6167A76FCAC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7EB4A0F-FA35-4FB1-990F-6167A76FCAC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7EB4A0F-FA35-4FB1-990F-6167A76FCAC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7355AB-F17E-4778-8591-013A8E44C648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7355AB-F17E-4778-8591-013A8E44C648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7355AB-F17E-4778-8591-013A8E44C648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7355AB-F17E-4778-8591-013A8E44C648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{737B2924-BAE1-4EA1-A352-C5C267B61602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{737B2924-BAE1-4EA1-A352-C5C267B61602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{737B2924-BAE1-4EA1-A352-C5C267B61602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{737B2924-BAE1-4EA1-A352-C5C267B61602}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

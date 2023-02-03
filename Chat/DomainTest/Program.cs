@@ -9,7 +9,7 @@ internal class Program
         Console.WriteLine("Enter server Ip/Host Address");
         var address = Console.ReadLine();
         using var messageWriter = new TextWriterMessageWriter(Console.Out);
-        var server = new Server(address, messageWriter);
+        var server = new Server(messageWriter);
         server.InitTestRoomAndUser();
 
         Console.WriteLine("Enter username");

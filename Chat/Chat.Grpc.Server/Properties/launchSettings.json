@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Chat.Grpc.Server": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5243;https://localhost:7155",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@ namespace GrpcStreaming.Services
 
         public UserService(IChatRoomService chatRoomService)
         {
-            _chatRoomService = chatRoomService;
+            _chatRoomService = chatRoomService; 
         }
 
         public override async Task<JoinUserReply> JoinUserChat(JoinUserRequest request, ServerCallContext context)

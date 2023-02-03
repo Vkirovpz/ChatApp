@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace Chat.Domain.Models
 {
+    public record ConnectedUser(bool IsConnected, string Username, string Reason = default);
+    public record DisconnectedUser(bool IsDisconnected, string Username);
+    public record CreatedRoom(bool IsCreated, string RoomName, string Reason = default);
+
     public class Server
     {
         private readonly IMessageWriter _messageWriter;
@@ -13,65 +17,54 @@ namespace Chat.Domain.Models
         public IEnumerable<ChatRoom> ChatRooms => _rooms.AsReadOnly();
         public IEnumerable<User> Users => _users.AsReadOnly();
 
-        public Server(string address, IMessageWriter messageWriter)
+        public Server(IMessageWriter messageWriter)
         {
-            Address = address;
             _messageWriter = messageWriter;
         }
 
-        public string Address { get; }
-        public void ConnectUser(string username)
+        public ConnectedUser ConnectUser(string username)
         {
             if (username is null) throw new ArgumentNullException(nameof(username));
-            if (_users.Any(u => u.Username == username))
-                return;  
+            if (IsUserConnected(username))
+                return new ConnectedUser(false, username, "Username duplicate");
              
-             var user = CreateUser(username);
+             var user = new User(username, _messageWriter);
              _users.Add(user);
+
+            return new ConnectedUser(true, username);
         }
 
-        public void AllChatRooms()
+        public CreatedRoom CreateChatRoom(string name, string username)
         {
-            foreach (var room in ChatRooms)
-            {
-                _messageWriter.Write(room.Name);
-            }
-
-        }
-
-        public User CreateUser(string username)
-        {
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
             if (string.IsNullOrWhiteSpace(username)) throw new ArgumentException($"'{nameof(username)}' cannot be null or whitespace.", nameof(username));
 
-            return new User(username, _messageWriter);
+            if (IsUserConnected(username) == false)
+                return new CreatedRoom(false, name, $"User '{username}' is not connected to the chat server.");
 
-        }
-        public void CreateChatRoom(string name, string username)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
-            if (string.IsNullOrWhiteSpace(username))
-                throw new ArgumentException($"'{nameof(username)}' cannot be null or whitespace.", nameof(username));
             if (_rooms.Any(r => r.Name == name))
-                return;
-                //throw new InvalidOperationException($"Room with name '{name}' already exist.");
-
-            var user = _users.First(u => u.Username == username);
-            var room = new ChatRoom(name, _messageWriter);
+                return new CreatedRoom(false, name, $"Room with name '{name}' already exist.");
+                
+            var room = new ChatRoom(name);
             _rooms.Add(room);
-            room.ConnectUser(user);
+
+            return new CreatedRoom(true, room.Name);
         }
 
-        public void InitTestRoomAndUser()
+        public IEnumerable<string> GetAllChatRoomsNames() => ChatRooms.Select(x => x.Name);
+
+        public bool IsUserConnected(string username) => _users.Any(u => u.Username == username);
+
+        public User GetUserByUsername(string username)
         {
-            var room = new ChatRoom("Testroom", _messageWriter);
-            var user = new User("Testuser", _messageWriter);
-            if (_rooms.Any(r => r.Name == "Testroom"))
-                return;
-                //throw new InvalidOperationException($"Room with name 'Testroom' already exist.");
-            _rooms.Add(room);
-            _users.Add(user);
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentException($"'{nameof(username)}' cannot be null or whitespace.", nameof(username));
+            return _users.First(u => u.Username == username);
         }
 
+        public ChatRoom GetChatRoomByName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
+            return _rooms.First(r => r.Name == name);
+        }
     }
 }

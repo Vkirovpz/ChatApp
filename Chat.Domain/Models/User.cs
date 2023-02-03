@@ -1,6 +1,5 @@
 ﻿using Chat.Domain.Models;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Chat.Domain
@@ -18,51 +17,42 @@ namespace Chat.Domain
         public string Username { get; }
 
         public ChatRoom Room { get; private set; }
-        public Server Server { get; private set; }
-        public void CreateRoom(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentException($"'{nameof(name)}' cannot be null or empty.", nameof(name));
-            Server.CreateChatRoom(name, Username);
-        }
-
-        public void JoinRoom(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentException($"'{nameof(name)}' cannot be null or empty.", nameof(name));
-
-            if (Server.ChatRooms.Any(r => r.Name == name) == false)
-                return;
-            Room = Server.ChatRooms.First(r => r.Name == name);
-            Room.ConnectUser(this);
-        }
-
-        public void JoinRoom(ChatRoom room)
+        
+        public ConnectedUser JoinRoom(ChatRoom room)
         {
             if (room is null) throw new ArgumentNullException(nameof(room));
 
-            Room = room;
+            var success = room.ConnectUser(this);
+            if (success)
+            {
+                Room = room;
+                var messages = Room.GetAllMessages();
+                foreach (var msg in messages)
+                {
+                    _messageWriter.WriteMessage(msg);
+                }
+                return new ConnectedUser(true, Username);
+            }
+            return new ConnectedUser(false, Username, $"User with that username '{Username}', already exist");
         }
 
         public void LeaveRoom()
         {
-            Room.DisconnectUser(this);
+            Room?.DisconnectUser(this);
+            Room = null;
         }
 
         public void SendMessage(string text)
         {
-            if (string.IsNullOrEmpty(text))
-                throw new ArgumentException($"'{nameof(text)}' cannot be null or empty.", nameof(text));
+            if (string.IsNullOrEmpty(text)) throw new ArgumentException($"'{nameof(text)}' cannot be null or empty.", nameof(text));
 
-            Room.ReceiveMessageFromUser(text, Username);
+            Room.PublishMessage(new Message(Username, text, Room.Name));
         }
 
         public void ReceiveMessage(Message message)
         {
-            if (message is null)
-                throw new ArgumentNullException(nameof(message));
+            if (message is null) throw new ArgumentNullException(nameof(message));
             _messageWriter.WriteMessage(message);
         }
-
     }
 }
