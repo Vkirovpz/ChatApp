@@ -5,6 +5,7 @@ using System.Linq;
 namespace Chat.Domain.Models
 {
     public record ConnectedUser(bool IsConnected, string Username, string Reason = default);
+    public record ConnectedUserToChatRoom(bool IsConnected, string Username, string Roomname, string Reason = default);
     public record DisconnectedUser(bool IsDisconnected, string Username);
     public record CreatedRoom(bool IsCreated, string RoomName, string Reason = default);
 

@@ -6,7 +6,7 @@ namespace Chat.Domain
 {
     public class User
     {
-        private readonly IMessageWriter _messageWriter;
+        private IMessageWriter _messageWriter;
         public User(string username, IMessageWriter messageWriter)
         {
             if (string.IsNullOrEmpty(username)) throw new ArgumentException($"'{nameof(username)}' cannot be null or empty.", nameof(username));
@@ -17,8 +17,8 @@ namespace Chat.Domain
         public string Username { get; }
 
         public ChatRoom Room { get; private set; }
-        
-        public ConnectedUser JoinRoom(ChatRoom room)
+
+        public ConnectedUserToChatRoom JoinRoom(ChatRoom room)
         {
             if (room is null) throw new ArgumentNullException(nameof(room));
 
@@ -29,11 +29,11 @@ namespace Chat.Domain
                 var messages = Room.GetAllMessages();
                 foreach (var msg in messages)
                 {
-                    _messageWriter.WriteMessage(msg);
+                    _messageWriter.WriteMessageAsync(msg).GetAwaiter().GetResult();
                 }
-                return new ConnectedUser(true, Username);
+                return new ConnectedUserToChatRoom(true, Username, Room.Name);
             }
-            return new ConnectedUser(false, Username, $"User with that username '{Username}', already exist");
+            return new ConnectedUserToChatRoom(false, Username, Room.Name, $"User with that username '{Username}', already exist");
         }
 
         public void LeaveRoom()
@@ -52,7 +52,13 @@ namespace Chat.Domain
         public void ReceiveMessage(Message message)
         {
             if (message is null) throw new ArgumentNullException(nameof(message));
-            _messageWriter.WriteMessage(message);
+
+            _messageWriter.WriteMessageAsync(message).GetAwaiter().GetResult();
+        }
+
+        public void SetWriter(IMessageWriter messageWriter)
+        {
+            _messageWriter = messageWriter ?? throw new ArgumentNullException(nameof(messageWriter));
         }
     }
 }

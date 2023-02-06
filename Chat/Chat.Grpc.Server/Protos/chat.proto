@@ -4,13 +4,18 @@ option csharp_namespace = "Chat.Grpc.Server.Protos";
 
 package chat;
 
+
 service ChatServer {
   rpc ConnectUser (ConnectUserRequest) returns (ConnectUserResponse);
   rpc CreateChatRoom (CreateChatRoomRequest) returns (CreateChatRoomResponse);
-  rpc JoinChatRoom (JoinChatRoomRequest) returns (JoinChatRoomResponse);
+  rpc JoinChatRoom (JoinChatRoomRequest) returns (stream ChatMessage);
   rpc LeaveChatRoom (LeaveChatRoomRequest) returns (LeaveChatRoomResponse);
   rpc GetAllChatRooms (GetAllRoomsRequest) returns (ListRoomsResponse);
-  rpc SendMessage (stream ChatMessage) returns (stream ChatMessage);
+  rpc SendMessage (ChatMessage) returns(Empty);
+}
+
+message Empty {
+	string result =1;
 }
 
 message GetAllRoomsRequest {
@@ -57,6 +62,7 @@ message JoinChatRoomResponse {
   bool success  = 1;
   string reason = 2;
   string username = 3;
+  string room_name =4 ;
 }
 
 message LeaveChatRoomRequest {

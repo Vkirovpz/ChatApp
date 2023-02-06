@@ -1,5 +1,4 @@
-﻿
-using Chat.Grpc.Client.Protos;
+﻿using Chat.Grpc.Client.Protos;
 using Grpc.Core;
 using Grpc.Net.Client;
 using System.Xml.Linq;
@@ -29,67 +28,74 @@ if (userConnectResponse.Success == true)
     Console.WriteLine("Press 2 to join room");
     Console.WriteLine("Press 3 to show existing rooms");
 
-    var command = Console.ReadLine();
+
+    Console.WriteLine("Enter name to create new chat room");
+    var newRoomName = Console.ReadLine();
+
+    var createChatRoomResponse = await client.CreateChatRoomAsync(new CreateChatRoomRequest
+    {
+        RoomName = newRoomName,
+        Username = username
+
+    });
+
+    Console.WriteLine(createChatRoomResponse.Success);
+    Console.WriteLine(createChatRoomResponse.Reason);
+
+    Console.WriteLine("Enter chat room name to join it");
+    var joinRoomName = Console.ReadLine();
+    var cts = new CancellationTokenSource();
+    var joinChatRoomResponse = client.JoinChatRoom(new JoinChatRoomRequest
+    {
+        RoomName = joinRoomName,
+        Username = username
+    }, cancellationToken: cts.Token);
+
+    var reading = Task.Run(async () =>
+    {
+        Console.WriteLine("Starting background task to receive messages");
+        try
+        {
+            while (await joinChatRoomResponse.ResponseStream.MoveNext())
+            {
+                Console.WriteLine($"{joinChatRoomResponse.ResponseStream.Current.Author} : {joinChatRoomResponse.ResponseStream.Current.Text}");
+            }
+        }
+        catch (RpcException) { }
+    });
+
+    Console.WriteLine("Starting to send messages");
+    Console.WriteLine("Type a message to echo then press enter.");
 
     while (true)
     {
-        if (command == "1")
+        var msg = Console.ReadLine();
+        var call = client.SendMessage(new ChatMessage { Author = username, RoomName = joinRoomName, Text = msg });
+        if (string.IsNullOrEmpty(msg))
         {
-            Console.WriteLine("Enter name to create new chat room");
-            var name = Console.ReadLine();
-
-            var createChatRoomResponse = await client.CreateChatRoomAsync(new CreateChatRoomRequest
-            {
-                RoomName = name,
+            cts.Cancel();
+            await client.LeaveChatRoomAsync(new LeaveChatRoomRequest
+            { 
                 Username = username
-
             });
-            Console.WriteLine(createChatRoomResponse.Success);
-            Console.WriteLine(createChatRoomResponse.Reason);
-            break;
-        }
-        else if (command == "2")
-        {
-            Console.WriteLine("Enter chat room name to join it");
-            var name = Console.ReadLine();
-            var joinChatRoomResponse = await client.JoinChatRoomAsync(new JoinChatRoomRequest
-            {
-                Username = username,
-                RoomName = name
-            });
-
-            Console.WriteLine(joinChatRoomResponse.Success);
-            Console.WriteLine(joinChatRoomResponse.Reason);
-            Console.WriteLine(joinChatRoomResponse.Username);
-            Console.ReadLine();
 
             break;
         }
-        //else if (command == "3")
-        //{
-        //    var allRoomsResponse = await client.GetAllChatRoomsAsync(new GetAllRoomsRequest());
-        //    foreach (var room in allRoomsResponse)
-        //    {
-        //        Console.WriteLine(room);
-        //    }
-            
-        //}
-        else
-        {
-            Console.WriteLine("Invalid command!");
-        }
-        command = Console.ReadLine();
+
     }
+
+    Console.WriteLine("Disconnecting");
+    await reading;
+    //var allRoomsNames = await client.GetAllChatRoomsNamesAsync();
 }
 
 
 
 
+//var leaveChatRoomResponse = await client.LeaveChatRoomAsync(new LeaveChatRoomRequest
+//{
+//    Username = username,
+//});
 
-var leaveChatRoomResponse = await client.LeaveChatRoomAsync(new LeaveChatRoomRequest
-{
-    Username= username,
-});
-
-Console.WriteLine(leaveChatRoomResponse.Success);
-Console.WriteLine(leaveChatRoomResponse.Username);
+//Console.WriteLine(leaveChatRoomResponse.Success);
+//Console.WriteLine(leaveChatRoomResponse.Username);

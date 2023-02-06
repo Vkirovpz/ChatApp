@@ -22,6 +22,11 @@ namespace GrpcStreaming.Services
             }
         }
 
+        public void ConnectUserToChatRoom(int roomId, Guid userId, IAsyncStreamWriter<ChatMessage> responseStream)
+        {
+            _chatRoomProvider.GetChatRoomById(roomId).UsersInRoom.FirstOrDefault(u => u.Id == userId).Stream = responseStream;
+        }
+
         public Task<int> AddUserToChatRoomAsync(User user)
         {
             var room = _chatRoomProvider.GetFreeChatRoom();
@@ -31,11 +36,6 @@ namespace GrpcStreaming.Services
                 Id = Guid.Parse(user.Id)
             });
             return Task.FromResult(room.Id);
-        }
-
-        public void ConnectUserToChatRoom(int roomId, Guid userId, IAsyncStreamWriter<ChatMessage> responseStream)
-        {
-            _chatRoomProvider.GetChatRoomById(roomId).UsersInRoom.FirstOrDefault(u => u.Id == userId).Stream = responseStream;
         }
 
         public void DisconnectUser(int roomId, Guid userId)

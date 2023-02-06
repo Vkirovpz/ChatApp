@@ -34,16 +34,15 @@ namespace Chat.Grpc.Server.Services
             });
         }
 
-        public override Task<JoinChatRoomResponse> JoinChatRoom(JoinChatRoomRequest request, ServerCallContext context)
+        public override Task JoinChatRoom(JoinChatRoomRequest request, IServerStreamWriter<ChatMessage> responseStream, ServerCallContext context)
         {
-            var joinedUser = chatServer.JoinRoom(request.RoomName, request.Username);
-            return Task.FromResult(new JoinChatRoomResponse
+            var writer = new GrpcTextWriter(responseStream);
+            var joinedUser = chatServer.JoinRoom(request.RoomName, request.Username, writer);
+            while (context.CancellationToken.IsCancellationRequested == false)
             {
-                Success = joinedUser.IsConnected,
-                Username = joinedUser.Username,
-                Reason = joinedUser.Reason ?? string.Empty
+            }
 
-            });
+            return Task.CompletedTask;
         }
 
         public override Task<LeaveChatRoomResponse> LeaveChatRoom(LeaveChatRoomRequest request, ServerCallContext context)
@@ -56,19 +55,17 @@ namespace Chat.Grpc.Server.Services
             });
         }
 
-        //public override Task<ListRoomsResponse> GetAllChatRooms(GetAllRoomsRequest request, ServerCallContext context)
-        //{
-        //    var allRooms = chatServer.GetAllRooms();
+        public override Task<Empty> SendMessage(ChatMessage request, ServerCallContext context)
+        {
+            if (string.Equals(request.Text, "!leave", StringComparison.OrdinalIgnoreCase))
+                return Task.FromResult(new Empty
+                {
+                    Result = "leave"
+                });
 
-        //    ListRoomsResponse response = new ListRoomsResponse();
-        //    foreach (var room in allRooms) 
-        //    {
-        //        response.RoomName == room
-        //    }
-        //     response.RoomName.ToList().AddRange(allRooms);
-            
+            chatServer.SendMessage(request.Author, request.Text);
 
-        //}
-
+            return Task.FromResult(new Empty());
+        }
     }
 }

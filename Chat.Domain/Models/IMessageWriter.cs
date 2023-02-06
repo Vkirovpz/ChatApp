@@ -1,9 +1,9 @@
-﻿namespace Chat.Domain.Models
+﻿using System.Threading.Tasks;
+
+namespace Chat.Domain.Models
 {
     public interface IMessageWriter
     {
-        void Write(string message);
-
-        void WriteMessage(Message message);
+        Task WriteMessageAsync(Message message);
     }
 }

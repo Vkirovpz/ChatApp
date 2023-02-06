@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Chat.Domain.Models
 {
@@ -24,26 +25,47 @@ namespace Chat.Domain.Models
             return server.CreateChatRoom(roomName, username);
         }
 
-        public ConnectedUser JoinRoom (string roomName, string username)
+        public ConnectedUserToChatRoom JoinRoom(string roomName, string username, IMessageWriter messageWriter)
         {
-           var user = server.GetUserByUsername(username);
-           var room = server.GetChatRoomByName(roomName);
+            var user = GetUserByUsername(username);
+            var room = GetChatRoomByName(roomName);
 
-           return user.JoinRoom(room);
+            var userJoined = user.JoinRoom(room);
+            if (userJoined.IsConnected)
+                user.SetWriter(messageWriter);
 
+            return userJoined;
+        }
+
+        public void SendMessage(string username, string text)
+        {
+            var user = GetUserByUsername(username);
+            user.SendMessage(text);
         }
 
         public DisconnectedUser LeaveRoom(string username)
         {
-            var user = server.GetUserByUsername(username);
+            var user = GetUserByUsername(username);
             var room = user.Room;
             return room.DisconnectUser(user);
         }
 
-        public List<string> GetAllRooms()
+        public IEnumerable<string> GetAllRooms()
         {
-            List<string> roomsAsList = server.GetAllChatRoomsNames().ToList();
-            return roomsAsList;
+            var roomsNames = server.GetAllChatRoomsNames();
+            return roomsNames;
         }
+
+        public User GetUserByUsername(string username)
+        {
+            return server.GetUserByUsername(username);
+        }
+
+        public ChatRoom GetChatRoomByName(string roomName)
+        {
+            return server.GetChatRoomByName(roomName);
+        }
+
+
     }
 }

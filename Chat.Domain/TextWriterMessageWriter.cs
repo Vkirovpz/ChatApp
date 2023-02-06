@@ -1,8 +1,7 @@
 ﻿using Chat.Domain.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Chat.Domain
 {
@@ -21,14 +20,9 @@ namespace Chat.Domain
             GC.SuppressFinalize(this);
         }
 
-        public void Write(string message)
+        public async Task WriteMessageAsync(Message message)
         {
-            textWriter.WriteLine($"{message}");
-        }
-
-        public void WriteMessage(Message message)
-        {
-            textWriter.WriteLine($"{message.Author} : {message.Text}  {message.SentOn}");
+            await textWriter.WriteLineAsync($"{message.Author} : {message.Text}");
         }
     }
 }
