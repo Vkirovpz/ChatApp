@@ -13,6 +13,10 @@ service ChatServer {
   rpc SendMessage (stream ChatMessage) returns (stream ChatMessage);
 }
 
+message GetAllRoomsRequest {
+
+}
+
 message ChatMessage{
 	string author = 1;
 	string room_name = 2;
