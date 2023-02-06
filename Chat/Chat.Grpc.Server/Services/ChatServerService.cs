@@ -51,20 +51,24 @@ namespace Chat.Grpc.Server.Services
             var disconnectedUser = chatServer.LeaveRoom(request.Username);
             return Task.FromResult(new LeaveChatRoomResponse
             {
-                Username= disconnectedUser.Username,
+                Username = disconnectedUser.Username,
                 Success = disconnectedUser.IsDisconnected
             });
         }
 
-        public override Task<ListRoomsResponse> GetAllChatRooms(GetAllRoomsRequest request, ServerCallContext context)
-        {
-            var allRooms = chatServer.GetAllRooms();
+        //public override Task<ListRoomsResponse> GetAllChatRooms(GetAllRoomsRequest request, ServerCallContext context)
+        //{
+        //    var allRooms = chatServer.GetAllRooms();
 
-            ListRoomsResponse response = new ListRoomsResponse();
-            response.RoomName.AddRange(allRooms);
-            return ListRoomsResponse;
-        }
+        //    ListRoomsResponse response = new ListRoomsResponse();
+        //    foreach (var room in allRooms) 
+        //    {
+        //        response.RoomName == room
+        //    }
+        //     response.RoomName.ToList().AddRange(allRooms);
+            
 
+        //}
 
     }
 }

@@ -35,7 +35,7 @@ if (userConnectResponse.Success == true)
     {
         if (command == "1")
         {
-            Console.WriteLine("Enter chat room name to create new");
+            Console.WriteLine("Enter name to create new chat room");
             var name = Console.ReadLine();
 
             var createChatRoomResponse = await client.CreateChatRoomAsync(new CreateChatRoomRequest
@@ -65,15 +65,15 @@ if (userConnectResponse.Success == true)
 
             break;
         }
-        else if (command == "3")
-        {
-            var allRoomsResponse = await client.GetAllChatRoomsAsync(new GetAllRoomsRequest());
-            foreach (var room in allRoomsResponse)
-            {
-                Console.WriteLine(room);
-            }
+        //else if (command == "3")
+        //{
+        //    var allRoomsResponse = await client.GetAllChatRoomsAsync(new GetAllRoomsRequest());
+        //    foreach (var room in allRoomsResponse)
+        //    {
+        //        Console.WriteLine(room);
+        //    }
             
-        }
+        //}
         else
         {
             Console.WriteLine("Invalid command!");

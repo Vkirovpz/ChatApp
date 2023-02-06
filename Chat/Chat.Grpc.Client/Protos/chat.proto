@@ -12,8 +12,10 @@ service ChatServer {
   rpc GetAllChatRooms (GetAllRoomsRequest) returns (ListRoomsResponse);
 }
 
-message GetAllRoomsRequest{
-
+message ChatMessage{
+	string author = 1;
+	string room_name = 2;
+	string text = 3;
 }
 
 message ListRoomsResponse{
