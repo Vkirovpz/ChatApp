@@ -29,10 +29,12 @@ namespace Chat.Domain.Models
         {
             var user = GetUserByUsername(username);
             var room = GetChatRoomByName(roomName);
+            user.SetWriter(messageWriter);
 
             var userJoined = user.JoinRoom(room);
-            if (userJoined.IsConnected)
-                user.SetWriter(messageWriter);
+ 
+            //if (userJoined.IsConnected)
+            //    user.SetWriter(messageWriter);
 
             return userJoined;
         }
@@ -52,8 +54,7 @@ namespace Chat.Domain.Models
 
         public IEnumerable<string> GetAllRooms()
         {
-            var roomsNames = server.GetAllChatRoomsNames();
-            return roomsNames;
+            return server.GetAllChatRoomsNames();
         }
 
         public User GetUserByUsername(string username)

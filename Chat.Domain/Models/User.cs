@@ -29,6 +29,7 @@ namespace Chat.Domain
                 var messages = Room.GetAllMessages();
                 foreach (var msg in messages)
                 {
+                    //ReceiveMessage(msg);
                     _messageWriter.WriteMessageAsync(msg).GetAwaiter().GetResult();
                 }
                 return new ConnectedUserToChatRoom(true, Username, Room.Name);

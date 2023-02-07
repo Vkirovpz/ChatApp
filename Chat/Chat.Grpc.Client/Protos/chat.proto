@@ -19,6 +19,7 @@ message Empty {
 	string result =1;
 }
 
+
 message GetAllRoomsRequest {
 
 }
