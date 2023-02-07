@@ -12,19 +12,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfClient", "Client\WcfClie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Domain", "..\Chat.Domain\Chat.Domain.csproj", "{1168D145-5F22-434C-9A98-0F412094A297}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcStreaming", "GrpcStreaming\GrpcStreaming.csproj", "{C6E7E123-5DC8-46AF-9137-82538453F381}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcStreamingClient", "GrpcStreamingClient\GrpcStreamingClient.csproj", "{D8645DE5-A697-446D-B16D-1B4BBE5C6E2A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRServer", "SignalRServer\SignalRServer.csproj", "{16BCDE46-BBF9-48B7-86A4-C65827BCAB7C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClient", "SignalRClient\SignalRClient.csproj", "{874B4960-4176-4453-B1D0-615F554EADF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainTest", "DomainTest\DomainTest.csproj", "{D7EB4A0F-FA35-4FB1-990F-6167A76FCAC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Grpc.Server", "Chat.Grpc.Server\Chat.Grpc.Server.csproj", "{6F7355AB-F17E-4778-8591-013A8E44C648}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Grpc.Server", "Chat.Grpc.Server\Chat.Grpc.Server.csproj", "{6F7355AB-F17E-4778-8591-013A8E44C648}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Grpc.Client", "Chat.Grpc.Client\Chat.Grpc.Client.csproj", "{737B2924-BAE1-4EA1-A352-C5C267B61602}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Grpc.Client", "Chat.Grpc.Client\Chat.Grpc.Client.csproj", "{737B2924-BAE1-4EA1-A352-C5C267B61602}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,14 +40,6 @@ Global
 		{1168D145-5F22-434C-9A98-0F412094A297}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1168D145-5F22-434C-9A98-0F412094A297}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1168D145-5F22-434C-9A98-0F412094A297}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6E7E123-5DC8-46AF-9137-82538453F381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6E7E123-5DC8-46AF-9137-82538453F381}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6E7E123-5DC8-46AF-9137-82538453F381}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6E7E123-5DC8-46AF-9137-82538453F381}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D8645DE5-A697-446D-B16D-1B4BBE5C6E2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8645DE5-A697-446D-B16D-1B4BBE5C6E2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8645DE5-A697-446D-B16D-1B4BBE5C6E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8645DE5-A697-446D-B16D-1B4BBE5C6E2A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{16BCDE46-BBF9-48B7-86A4-C65827BCAB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16BCDE46-BBF9-48B7-86A4-C65827BCAB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16BCDE46-BBF9-48B7-86A4-C65827BCAB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU

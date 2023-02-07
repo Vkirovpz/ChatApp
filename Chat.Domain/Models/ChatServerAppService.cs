@@ -28,14 +28,11 @@ namespace Chat.Domain.Models
         public ConnectedUserToChatRoom JoinRoom(string roomName, string username, IMessageWriter messageWriter)
         {
             var user = GetUserByUsername(username);
-            var room = GetChatRoomByName(roomName);
+            //var room = GetChatRoomByName(roomName);
+            var room = server.ChatRooms.FirstOrDefault(x => x.Name== roomName);
             user.SetWriter(messageWriter);
 
             var userJoined = user.JoinRoom(room);
- 
-            //if (userJoined.IsConnected)
-            //    user.SetWriter(messageWriter);
-
             return userJoined;
         }
 

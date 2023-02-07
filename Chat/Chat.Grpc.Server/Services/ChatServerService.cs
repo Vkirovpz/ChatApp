@@ -38,6 +38,10 @@ namespace Chat.Grpc.Server.Services
         {
             var writer = new GrpcTextWriter(responseStream);
             var joinedUser = chatServer.JoinRoom(request.RoomName, request.Username, writer);
+            if (joinedUser.IsConnected == false)
+            {
+                return Task.CompletedTask;
+            }
             while (context.CancellationToken.IsCancellationRequested == false)
             {
             }
@@ -70,7 +74,7 @@ namespace Chat.Grpc.Server.Services
 
         public override Task<ListRoomsResponse> GetAllChatRooms(GetAllRoomsRequest request, ServerCallContext context)
         {
-            var rooms = chatServer.GetAllRooms().ToList();
+            var rooms = chatServer.GetAllRooms();
             ListRoomsResponse response = new ListRoomsResponse();
             response.RoomName.AddRange(rooms);
 

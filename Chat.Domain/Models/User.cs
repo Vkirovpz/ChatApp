@@ -20,7 +20,7 @@ namespace Chat.Domain
 
         public ConnectedUserToChatRoom JoinRoom(ChatRoom room)
         {
-            if (room is null) throw new ArgumentNullException(nameof(room));
+            if (room is null) return new ConnectedUserToChatRoom(false, Username, $"This room, doesnt exist");
 
             var success = room.ConnectUser(this);
             if (success)
