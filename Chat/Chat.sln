@@ -22,6 +22,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Grpc.Server", "Chat.Gr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.Grpc.Client", "Chat.Grpc.Client\Chat.Grpc.Client.csproj", "{737B2924-BAE1-4EA1-A352-C5C267B61602}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqProducer", "RabbitMqProducer\RabbitMqProducer.csproj", "{05ED1F13-F4EF-4C32-9420-E13AF65DD069}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMq", "RabbitMq\RabbitMq.csproj", "{864A0F14-1D58-4C5C-9D7F-7D69C75BC53C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +64,14 @@ Global
 		{737B2924-BAE1-4EA1-A352-C5C267B61602}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{737B2924-BAE1-4EA1-A352-C5C267B61602}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{737B2924-BAE1-4EA1-A352-C5C267B61602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05ED1F13-F4EF-4C32-9420-E13AF65DD069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05ED1F13-F4EF-4C32-9420-E13AF65DD069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05ED1F13-F4EF-4C32-9420-E13AF65DD069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05ED1F13-F4EF-4C32-9420-E13AF65DD069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{864A0F14-1D58-4C5C-9D7F-7D69C75BC53C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{864A0F14-1D58-4C5C-9D7F-7D69C75BC53C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{864A0F14-1D58-4C5C-9D7F-7D69C75BC53C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{864A0F14-1D58-4C5C-9D7F-7D69C75BC53C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
