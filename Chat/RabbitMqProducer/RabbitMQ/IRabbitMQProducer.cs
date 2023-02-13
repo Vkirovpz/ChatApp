@@ -1,9 +1,10 @@
-﻿namespace RabbitMqProducer.RabbitMQ
+﻿using Chat.Domain.Models;
+
+namespace RabbitMqProducer.RabbitMQ
 {
     public interface IRabbitMQProducer
     {
-        public void SendMessage<T>(T msg);
-        public void SendMessageDirect<T>(T msg);
+        public void SendMessage(Message msg);
     }
 }
 

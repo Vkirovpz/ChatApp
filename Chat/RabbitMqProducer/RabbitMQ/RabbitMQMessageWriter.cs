@@ -1,8 +1,4 @@
 ﻿using Chat.Domain.Models;
-using Microsoft.AspNetCore.SignalR;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using System.Text;
 
 namespace RabbitMqProducer.RabbitMQ
 {
@@ -15,9 +11,11 @@ namespace RabbitMqProducer.RabbitMQ
             this.producer = producer;
         }
 
-        public async Task WriteMessageAsync(Message message)
+        public Task WriteMessageAsync(Message message)
         {
-           producer.SendMessage(message);
+            producer.SendMessage(message);
+            return Task.CompletedTask;
         }
     }
 }
+ 

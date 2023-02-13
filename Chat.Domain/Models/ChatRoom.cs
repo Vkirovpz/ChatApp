@@ -23,7 +23,7 @@ namespace Chat.Domain.Models
             if (user is null) throw new ArgumentNullException(nameof(user));
             if (_usersInRoom.Any(u => u.Username == user.Username))
                 return false;
-            //throw new InvalidOperationException($"User with that username '{user.Username}', already exist");
+
             _usersInRoom.Add(user);
             return true;
         }
