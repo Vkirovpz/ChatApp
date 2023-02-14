@@ -2,7 +2,9 @@
 using Chat.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RabbitMqProducer.Models;
 using RabbitMqProducer.RabbitMQ;
+using static RabbitMqProducer.Models.RequestModels;
 
 namespace RabbitMqProducer.Controllers
 {
@@ -27,23 +29,23 @@ namespace RabbitMqProducer.Controllers
         }
 
         [HttpPost("/leaveRoom")]
-        public DisconnectedUser LeaveRoom(string username)
+        public DisconnectedUser LeaveRoom([FromBody] string username)
         {
             var disconnectedUser = _chatServer.LeaveRoom(username);
             return disconnectedUser;
         }
 
         [HttpPost("/createRoom")]
-        public CreatedRoom CreateChatRoom(string username, string roomName)
+        public CreatedRoom CreateChatRoom(CreateRoomRequest request)
         {
-            var createdRoom = _chatServer.CreateChatRoom(roomName, username);
+            var createdRoom = _chatServer.CreateChatRoom(request.roomName, request.username);
             return createdRoom;
         }
 
         [HttpPost("/sendMessage")]
-        public void SendMessage(string username, string message)
+        public void SendMessage(SendMessageRequest request)
         {
-            _chatServer.SendMessage(username, message);
+            _chatServer.SendMessage(request.username, request.message);
         }
 
         [HttpGet("/getAllRooms")]
@@ -54,9 +56,9 @@ namespace RabbitMqProducer.Controllers
         }
 
         [HttpPost("/joinRoom")]
-        public ConnectedUserToChatRoom JoinChatRoom(string username, string roomName)
+        public ConnectedUserToChatRoom JoinChatRoom(JoinRoomRequest request)
         {
-            var connectedUser = _chatServer.JoinRoom(roomName, username, messageWriter);
+            var connectedUser = _chatServer.JoinRoom(request.roomName, request.username, messageWriter);
             return connectedUser;
         }
     }

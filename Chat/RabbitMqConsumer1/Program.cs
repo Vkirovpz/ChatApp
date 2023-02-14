@@ -14,16 +14,6 @@ var factory = new ConnectionFactory() { HostName = "localhost" };
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
-//channel.ExchangeDeclare(exchange: chatRoom, ExchangeType.Direct);
-////channel.ExchangeDeclare(exchange: "user", ExchangeType.Direct);
-
-//channel.QueueDeclare(queue: username);
-
-//channel.QueueBind(queue: username, exchange: chatRoom, routingKey: "bahur");
-
-//channel.QueueBind(queue: username, exchange: "user",
-//    routingKey: username);
-
 var consumer = new EventingBasicConsumer(channel);
 consumer.Received += (model, ea) =>
 {
@@ -36,3 +26,14 @@ consumer.Received += (model, ea) =>
 channel.BasicConsume(queue: username, autoAck: true, consumer: consumer);
 Console.WriteLine($"{username} - consuming");
 Console.ReadKey();
+
+
+//channel.ExchangeDeclare(exchange: chatRoom, ExchangeType.Direct);
+////channel.ExchangeDeclare(exchange: "user", ExchangeType.Direct);
+
+//channel.QueueDeclare(queue: username);
+
+//channel.QueueBind(queue: username, exchange: chatRoom, routingKey: "bahur");
+
+//channel.QueueBind(queue: username, exchange: "user",
+//    routingKey: username);
