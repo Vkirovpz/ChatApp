@@ -12,15 +12,17 @@ namespace Chat.Domain.Models
     public class Server
     {
         private readonly IMessageWriter _messageWriter;
+        private readonly IMessagePublisher messagePublisher;
         private readonly List<ChatRoom> _rooms = new List<ChatRoom>();
         private readonly List<User> _users = new List<User>();
 
         public IEnumerable<ChatRoom> ChatRooms => _rooms.AsReadOnly();
         public IEnumerable<User> Users => _users.AsReadOnly();
 
-        public Server(IMessageWriter messageWriter)
+        public Server(IMessageWriter messageWriter, IMessagePublisher messagePublisher)
         {
             _messageWriter = messageWriter;
+            this.messagePublisher = messagePublisher;
         }
 
         public ConnectedUser ConnectUser(string username)
@@ -46,7 +48,7 @@ namespace Chat.Domain.Models
             if (_rooms.Any(r => r.Name == name))
                 return new CreatedRoom(false, name, $"Room with name '{name}' already exist.");
                 
-            var room = new ChatRoom(name);
+            var room = new ChatRoom(name, messagePublisher);
             _rooms.Add(room);
 
             return new CreatedRoom(true, room.Name);

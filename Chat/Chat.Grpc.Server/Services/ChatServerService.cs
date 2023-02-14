@@ -42,9 +42,8 @@ namespace Chat.Grpc.Server.Services
             {
                 return Task.CompletedTask;
             }
-            while (context.CancellationToken.IsCancellationRequested == false)
-            {
-            }
+
+            while (context.CancellationToken.IsCancellationRequested == false) { }
 
             return Task.CompletedTask;
         }

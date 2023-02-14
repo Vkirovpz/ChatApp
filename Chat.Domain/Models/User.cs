@@ -7,6 +7,7 @@ namespace Chat.Domain
     public class User
     {
         private IMessageWriter _messageWriter;
+
         public User(string username, IMessageWriter messageWriter)
         {
             if (string.IsNullOrEmpty(username)) throw new ArgumentException($"'{nameof(username)}' cannot be null or empty.", nameof(username));
@@ -18,6 +19,8 @@ namespace Chat.Domain
 
         public ChatRoom Room { get; private set; }
 
+        public IMessageWriter MessageWriter => _messageWriter;
+
         public ConnectedUserToChatRoom JoinRoom(ChatRoom room)
         {
             if (room is null) return new ConnectedUserToChatRoom(false, Username, $"This room, doesnt exist");
@@ -26,14 +29,9 @@ namespace Chat.Domain
             if (success)
             {
                 Room = room;
-                var messages = Room.GetAllMessages();
-                foreach (var msg in messages)
-                {
-                    //ReceiveMessage(msg);
-                    _messageWriter.WriteMessageAsync(msg).GetAwaiter().GetResult();
-                }
                 return new ConnectedUserToChatRoom(true, Username, Room.Name);
             }
+
             return new ConnectedUserToChatRoom(false, Username, Room.Name, $"User with that username '{Username}', already exist");
         }
 

@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<ChatServerAppService>();
 builder.Services.AddSingleton<Server>();
 builder.Services.AddTransient<IMessageWriter, TextWriterMessageWriter>();
+builder.Services.AddTransient<IMessagePublisher, SignalRMessagePublisher>();
 builder.Services.AddSingleton(Console.Out);
 
 builder.Services.AddSignalR();

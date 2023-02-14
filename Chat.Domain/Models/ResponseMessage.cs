@@ -1,6 +1,4 @@
 ﻿using System;
-
-
 namespace Chat.Domain.Models
 {
     public class ResponseMessage

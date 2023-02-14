@@ -13,6 +13,7 @@ builder.Services.AddGrpc();
 builder.Services.AddTransient<ChatServerAppService>();
 builder.Services.AddSingleton<Server>();
 builder.Services.AddTransient<IMessageWriter, TextWriterMessageWriter>();
+builder.Services.AddTransient<IMessagePublisher, GrpcMessagePublisher>();
 builder.Services.AddSingleton(Console.Out);
 
 var app = builder.Build();

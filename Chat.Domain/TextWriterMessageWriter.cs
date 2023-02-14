@@ -1,6 +1,8 @@
 ﻿using Chat.Domain.Models;
 using System;
 using System.IO;
+using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Chat.Domain

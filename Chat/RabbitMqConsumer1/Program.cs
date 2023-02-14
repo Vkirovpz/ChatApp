@@ -7,20 +7,22 @@ using System.Text.Json;
 Console.WriteLine("Enter username");
 var username = Console.ReadLine();
 Console.WriteLine("Enter chatroom");
-var chatRoomKey = Console.ReadLine();
+var chatRoom = Console.ReadLine();
 
 var factory = new ConnectionFactory() { HostName = "localhost" };
 
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
-channel.ExchangeDeclare(exchange: "messages", ExchangeType.Direct);
+//channel.ExchangeDeclare(exchange: chatRoom, ExchangeType.Direct);
+////channel.ExchangeDeclare(exchange: "user", ExchangeType.Direct);
 
-channel.QueueDeclare(queue: username);
-//var queueName = channel.QueueDeclare().QueueName;
+//channel.QueueDeclare(queue: username);
 
-channel.QueueBind(queue: username, exchange: "messages",
-    routingKey: chatRoomKey);
+//channel.QueueBind(queue: username, exchange: chatRoom, routingKey: "bahur");
+
+//channel.QueueBind(queue: username, exchange: "user",
+//    routingKey: username);
 
 var consumer = new EventingBasicConsumer(channel);
 consumer.Received += (model, ea) =>
@@ -30,6 +32,7 @@ consumer.Received += (model, ea) =>
     ResponseMessage? msg = JsonSerializer.Deserialize<ResponseMessage>(message);
     Console.WriteLine($"{msg.Author} : {msg.Text}");
 };
+
 channel.BasicConsume(queue: username, autoAck: true, consumer: consumer);
 Console.WriteLine($"{username} - consuming");
 Console.ReadKey();

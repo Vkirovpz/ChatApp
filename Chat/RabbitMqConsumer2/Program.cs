@@ -20,8 +20,6 @@ channel.ExchangeDeclare(exchange: "messages", ExchangeType.Direct);
 
 channel.QueueDeclare(queue: username);
 
-//var queueName = channel.QueueDeclare().QueueName;
-
 channel.QueueBind(queue: username, exchange: "messages",
     routingKey: chatRoomKey);
 
@@ -34,7 +32,7 @@ consumer.Received += (model, ea) =>
     Console.WriteLine($"{msg.Author} : {msg.Text}");
 };
 channel.BasicConsume(queue: username, autoAck: true, consumer: consumer);
-Console.WriteLine("Consumer2 - consuming");
+Console.WriteLine($"{username} - consuming");
 Console.ReadKey();
 
 

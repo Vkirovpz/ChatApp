@@ -1,4 +1,5 @@
-﻿using Chat.Domain.Models;
+﻿using Chat.Domain;
+using Chat.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMqProducer.RabbitMQ;
@@ -9,13 +10,13 @@ namespace RabbitMqProducer.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IRabbitMQProducer _rabbitMQProducer;
         private readonly ChatServerAppService _chatServer;
+        private readonly IMessageWriter messageWriter;
 
-        public UsersController(IRabbitMQProducer rabbitMQProducer, ChatServerAppService chatService)
+        public UsersController(ChatServerAppService chatService, IMessageWriter messageWriter)        
         {
-            _rabbitMQProducer = rabbitMQProducer;
             _chatServer = chatService;
+            this.messageWriter = messageWriter;
         }
 
         [HttpPost("/connectUser")]
@@ -55,8 +56,7 @@ namespace RabbitMqProducer.Controllers
         [HttpPost("/joinRoom")]
         public ConnectedUserToChatRoom JoinChatRoom(string username, string roomName)
         {
-            var writer = new RabbitMQMessageWriter(_rabbitMQProducer);
-            var connectedUser = _chatServer.JoinRoom(roomName, username, writer);
+            var connectedUser = _chatServer.JoinRoom(roomName, username, messageWriter);
             return connectedUser;
         }
     }
