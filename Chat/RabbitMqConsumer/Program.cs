@@ -1,106 +1,30 @@
-﻿using System.Net.Http.Json;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text;
 using System.Net.Http.Headers;
 using RabbitMQ.Client.Events;
 using Chat.Domain.Models;
 using RabbitMQ.Client;
-using System.Net.Http;
 
 class Program
 {
-    static HttpClient client = new HttpClient();
-
-    static async Task<ConnectedUserResponse> ConnectUserAsync(string username)
+    private static async Task Main(string[] args)
     {
-        var json = JsonSerializer.Serialize(username);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync("/connectUser", content);
-        response.EnsureSuccessStatusCode();
-        var connectedUser = await response.Content.ReadFromJsonAsync<ConnectedUserResponse>();
-        return connectedUser;
+        var httpClient = new HttpClient();
+        httpClient.BaseAddress = new Uri("https://localhost:7106");
+        httpClient.DefaultRequestHeaders.Accept.Clear();
+        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var client = new ChatHttpClient(httpClient);
+        await RunAsync(client);
     }
 
-    static async Task<DisconnectedUserResponse> DisconnectUserAsync(string username)
+    static async Task RunAsync(ChatHttpClient client)
     {
-        var json = JsonSerializer.Serialize(username);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync("/leaveRoom", content);
-        response.EnsureSuccessStatusCode();
-        var disconnectedUser = await response.Content.ReadFromJsonAsync<DisconnectedUserResponse>();
-        return disconnectedUser;
-    }
-
-    static async Task<CreatedRoomResponse> CreateRoomAsync(string username, string roomName)
-    {
-        var request = new CreateRoomRequest(username, roomName);
-        var json = JsonSerializer.Serialize(request);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync("/createRoom", content);
-        response.EnsureSuccessStatusCode();
-        var createdRoom = await response.Content.ReadFromJsonAsync<CreatedRoomResponse>();
-        return createdRoom;
-    }
-
-    static async Task<ConnectedUserResponse> JoinRoomAsync(string username, string roomName)
-    {
-        var request = new JoinRoomRequest(username, roomName);
-        var json = JsonSerializer.Serialize(request);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync("/joinRoom", content);
-        response.EnsureSuccessStatusCode();
-        var connectedUserToChatRoom = await response.Content.ReadFromJsonAsync<ConnectedUserResponse>();
-        return connectedUserToChatRoom;
-    }
-
-    static async Task<string> SendMessageAsync(string username, string message)
-    {
-        var request = new SendMessageRequest(username, message);
-        var json = JsonSerializer.Serialize(request);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync("/sendMessage", content);
-        response.EnsureSuccessStatusCode();
-        var emptyResponse = await response.Content.ReadAsStringAsync();
-        return emptyResponse;
-    }
-
-    static async Task<List<string>> GetAllRoomNamesAsync()
-    {
-        var response = await client.GetAsync("/getAllRooms");
-        response.EnsureSuccessStatusCode();
-        var resp = await response.Content.ReadAsStringAsync();
-        List<string> names = JsonSerializer.Deserialize<List<string>>(resp);
-        return names;
-
-    }
-
-    public record CreateRoomRequest(string username, string roomName);
-    public record CreatedRoomResponse(bool IsCreated, string RoomName, string Reason = default);
-    public record UserRequest(string Username);
-    public record ConnectedUserResponse(bool IsConnected, string Username, string Reason = null);
-    public record DisconnectedUserResponse(bool IsDisconnected, string Username);
-    public record JoinRoomRequest(string username, string roomName);
-
-    public record SendMessageRequest(string username, string message);
-
-
-    private static void Main(string[] args)
-    {
-        RunAsync().GetAwaiter().GetResult();
-    }
-
-    static async Task RunAsync()
-    {
-        client.BaseAddress = new Uri("https://localhost:7106");
-        client.DefaultRequestHeaders.Accept.Clear();
-        client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-
         try
         {
             Console.WriteLine("Enter username");
             var username = Console.ReadLine();
-            var connectedUser = await ConnectUserAsync(username);
+            var connectedUser = await client.ConnectUserAsync(username);
 
             if (connectedUser.IsConnected)
             {
@@ -113,7 +37,7 @@ class Program
                     {
                         Console.WriteLine("Enter room name");
                         var roomName = Console.ReadLine();
-                        var createdRoom = await CreateRoomAsync(username, roomName);
+                        var createdRoom = await client.CreateRoomAsync(username, roomName);
                         if (createdRoom.IsCreated)
                         {
                             Console.WriteLine($"Room {createdRoom.RoomName} created succesfully");
@@ -124,7 +48,7 @@ class Program
                     {
                         Console.WriteLine("Enter chat room name to join it");
                         var joinRoomName = Console.ReadLine();
-                        var connectedUserToChatRoom = await JoinRoomAsync(username, joinRoomName);
+                        var connectedUserToChatRoom = await client.JoinRoomAsync(username, joinRoomName);
                         if (connectedUserToChatRoom.IsConnected)
                         {
                             var factory = new ConnectionFactory() { HostName = "localhost" };
@@ -150,7 +74,7 @@ class Program
                                 var msg = Console.ReadLine();
                                 if (string.Equals(msg, "qw!", StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    var disconnectUser = await DisconnectUserAsync(username);
+                                    var disconnectUser = await client.DisconnectUserAsync(username);
                                     if (disconnectUser.IsDisconnected)
                                     {
                                         Console.WriteLine($"{username} disconnected");
@@ -158,16 +82,16 @@ class Program
                                     }
                                     break;
                                 }
-                                await SendMessageAsync(username, msg);
+                                await client.SendMessageAsync(username, msg);
                             }
                         }
 
-                    }
+                    }   
                     else if (cmd == "3")
                     {
                         Console.Clear();
-                        var rooms = await GetAllRoomNamesAsync();
-                   
+                        var rooms = await client.GetAllRoomNamesAsync();
+
                         foreach (var room in rooms)
                         {
                             Console.WriteLine($"{room}");
